@@ -1,122 +1,127 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, SafeAreaView, Image, ImageBackground, Platform, StatusBar, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView , TouchableOpacity, StatusBar, Platform, ImageBackground, Image} from 'react-native';
 
 export default class HomeScreen extends React.Component{
     render(){
         return(
-            <View>
-                <SafeAreaView>
+            <View style={styles.container}>
+                <SafeAreaView style={styles.droidSafeArea}/>
                     <ImageBackground source={require('../assets/stars.gif')} style={styles.backgroundImage}>
                         <View style={styles.titleBar}>
                             <Text style={styles.titleText}>
                                 STELLAR APP
                             </Text>
-                        </View>
 
-                        <View style={styles.titleBar}>
                             <Image
                                 source={require('../assets/main-icon.png')}
-                                style={{height:300, width:300}}
+                                style={{height:300, width:300, margin:90,}}
                             />
                         </View>
 
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity onPress={
+                        <TouchableOpacity style={styles.routeCard}
+                            onPress={
                                 ()=>{
                                     this.props.navigation.navigate("Space Craft")
-                                }}
-                                    style={styles.button}>
-                                <Text style={styles.buttonText}>
-                                    Space Craft
-                                </Text>
-                            </TouchableOpacity>
-                            <Image
-                                source={require('../assets/space_crafts.png')}
-                                style={{height:100, width:100}}
-                            />
-                        </View>
+                                }
+                            }>
+                            <Text style={styles.routeText}>
+                               Space Crafts
+                            </Text>
+                            <Text style={styles.knowMore}>{"know more --->"}</Text>
+                            
+                            <Image source={require("../assets/space_crafts.png")} style={styles.iconImage}/>
+                        </TouchableOpacity>
 
-
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity onPress={
+                        <TouchableOpacity style={styles.routeCard}
+                            onPress={
                                 ()=>{
                                     this.props.navigation.navigate("Daily Pic")
-                                }}
-                                    style={styles.button}>
-                                <Text style={styles.buttonText}>
-                                    Daily Pics
-                                </Text>
-                            </TouchableOpacity>
-                            <Image
-                                source={require('../assets/daily_pictures.png')}
-                                style={{height:100, width:100}}
-                            />
-                        </View>
+                                }
+                            }
+                        >
+                            <Text style={styles.routeText}>
+                                Daily Pictures
+                            </Text>
+                            <Text style={styles.knowMore}>{"know more --->"}</Text>
+                            
+                            <Image source={require("../assets/daily_pictures.png")} style={styles.iconImage}/>
+                        </TouchableOpacity>
 
-
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity onPress={
+                        <TouchableOpacity style={styles.routeCard}
+                            onPress={
                                 ()=>{
                                     this.props.navigation.navigate("Star Map")
-                                }}
-                                    style={styles.button}>
-                                <Text style={styles.buttonText}>
-                                    Star Map here
-                                </Text>
-                            </TouchableOpacity>
-                            <Image
-                                source={require('../assets/star_map.png')}
-                                style={{height:100, width:100}}
-                            />
-                        </View>
-
-                    </ImageBackground>
-                </SafeAreaView>
+                                }
+                            }
+                        >
+                            <Text style={styles.routeText}>
+                                Star Map
+                            </Text>
+                            <Text style={styles.knowMore}>{"know more --->"}</Text>
+                            
+                            <Image source={require("../assets/star_map.png")} style={styles.iconImage}/>
+                        </TouchableOpacity>
+                </ImageBackground>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    screenText:{
-        fontSize:20,
+    container:{
+        flex:1,
+    },
+    droidSafeArea:{
+        marginTop:Platform.OS==="android"? StatusBar.currentHeight:0,
+    },
+    titleBar:{
+        flex:0.15,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    routeCard:{
+        flex:0.25,
+        marginLeft:50,
+        marginRight:50,
+        marginTop:50,
+        borderRadius:30,
+        backgroundColor:'white',
+    },
+    routeText:{
+        fontSize:35,
         fontWeight:'bold',
-        textAlign:'center',
-        marginTop:20,
+        color:'black',
+        marginTop:75,
+        paddingLeft:30,
+    },
+    titleText:{
+        fontSize:40,
+        fontWeight:'bold',
+        color:'white'
     },
     backgroundImage:{
         flex:1,
         resizeMode:'cover',
     },
-    titleBar:{
-        justifyContent:'center',
-        alignSelf:'center',
-        textAlign:'center',
+    knowMore:{
+        paddingLeft:30,
+        color:'red',
+        fontSize:15,
     },
-    titleText:{
-        fontSize:50,
-        fontWeight:'bold',
-        color:'white',
+    bgDigit:{
+        position:"absolute",
+        color:'blue',
+        fontSize:150,
+        right:20,
+        bottom:-15,
+        zIndex:-1,
     },
-    buttonContainer:{
-        flex:1,
-        alignSelf:'center',
-        textAlign:'center',
-        marginTop:40,
-        flexDirection:'row',
-    },
-    button:{
-        alignSelf:'center',
-        borderRadius:100,
-        borderWidth:5,
-        backgroundColor:'white',
-        width:300,
-        height:60,
-    },
-    buttonText:{
-        fontSize:35,
-        fontWeight:'bold',
-        color:'purple',
-        textAlign:'center',
+    iconImage:{
+        position:'absolute',
+        height:200,
+        width:200,
+        resizeMode:"contain",
+        right:20,
+        top:-80,
     }
 })
